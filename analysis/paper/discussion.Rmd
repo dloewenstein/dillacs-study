@@ -1,0 +1,180 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, include = FALSE)
+```
+
+# Discussion
+
+The main finding of the study is that the ability to discriminate between LBBB
+and normal QRS duration among patients with severely reduced LV ejection fraction
+and no scar was fair for CURE and excellent for SSI. This highlights that, when
+developing and evaluating indices aimed at accurately identifying mechanical
+dyssynchrony amenable to CRT, it is important to evaluate the performance
+of a proposed index both in patients with LBBB, and in comparison to control
+subjects with normal QRS duration.
+
+The lack of response and even harmful effects of CRT when implanted in patients with narrow QRS
+complexes indicates that CRT requires an electrical substrate
+[@beshai_cardiacresynchronizationtherapyheart_2007;
+@ruschitzka_cardiacresynchronizationtherapyheart_2013]. Findings that LBBB
+patients derive greater benefit from CRT compared to those without support that
+LBBB is this electrical substrate [@zareba_effectiveness_2011;
+@gold_effect_2012; @bristow_cardiac-resynchronization_2004]. Response to CRT
+can partly be explained by correction of the discoordinated contraction of
+myocardial wall segments, a consequence of abnormal electrical activation.
+However, not all patients with LBBB by conventional electrocardiographic criteria
+have complete LBBB [@vassallo_endocardialactivationleft_1984;
+@auricchio_characterizationleftventricular_2004], and mechanical dyssynchrony
+is not uniquely associated with electrical dyssynchrony
+[@jackson_interactionqrsduration_2018; @maret_functional_2009]. For example,
+focal LV myocardial scarring is also known to cause abnormalities in regional
+myocardial mechanics [@maret_functional_2009]. Approximately one third
+of patients with LBBB by conventional criteria do not have strict LBBB
+[@strauss_differentiationleftbundle_2012]. Consequently, Strauss, et al, proposed more
+strict criteria for LBBB [@strauss_definingleftbundle_2011]. Increased rate
+of CRT response has been found when using this strict definition of LBBB
+[@jastrzebski_comparisonfourlbbb_2018; @tian_truecompleteleft_2013;
+@mascioli_electrocardiographiccriteriatrue_2012], and strict LBBB is associated with
+greater mechanical dyssynchrony than non-strict LBBB [@andersson_left_2013].
+Mechanical dyssynchrony per se might therefore not be of primary interest in
+predicting CRT response but instead focus should be on identification and
+quantification of the mechanical dyssynchrony pattern associated with an
+abnormal electrical activation as seen in complete LBBB. Importantly, the
+current study evaluates the discriminatory ability of two recently
+proposed mechanical dyssynchrony indices for the mechanical dyssynchrony
+pattern associated with strict LBBB compared to patients with equally reduced
+ejection fraction but normal QRS, while controlling for confounding factors
+such as scar.
+
+QRS duration cannot accurately characterize the spectrum of conduction
+abnormalities, and so it seems unlikely that any singular mechanical
+dyssynchrony index will be able to capture the full spectrum of variation
+inherent to dyssynchronous ventricular contraction. While both CURE and SSI
+capture differences in the pattern of discoordination on a group level, we
+found SSI superior to CURE with regards to the ability to differentiate between
+LBBB and controls. Our results suggest that the incremental mechanical
+dyssynchrony component associated with LBBB is better characterized by
+quantification of the absolute extent of stretch during the opposing directions
+of movement in the septum and lateral wall.
+
+SSI was developed by Lumens et al.
+[@lumens_differentiatingelectromechanicalnon_2015] in an attempt to
+characterize the electromechancial substrate that may respond to CRT. They used a
+computational model to simulate electromechanical and non-electrical substrates
+of mechanical dyssynchrony and identified strain characteristics specific for
+the different substrates of mechanical dyssynchrony. In a study of patients
+enrolled in the Adaptive CRT trial, it was found that SSI by echocardiography
+was independently associated with CRT outcome, adjusting for QRS morphology,
+QRS duration, sex, heart failure etiology, and treatment with angiotensin-converting enzyme
+inhibitors/angiotensin II receptor blockers
+[@gorcsan_systolicstretchcharacterizes_2018]. However, whether SSI has added
+prognostic value over strict LBBB morphology is still unknown. It remains to be
+explored whether SSI can be used to identify non-LBBB patients that may be suitable for CRT,
+and such studies are justified.
+
+CURE was first evaluated in a canine model of heart failure and LBBB conduction
+delay [@leclercq_systolicimprovementmechanical_2002; @helm_cardiac_2005]. It
+was found that biventricular pacing leads to greater synchrony (increased
+CURE), improved global function, and that circumferential dyssynchrony indices
+had greater dynamic range when compared to longitudinal indices
+[@helm_cardiac_2005]. Importantly, CURE was found sensitive to regionally
+clustered dyssynchrony [@helm_cardiac_2005]. Regionally clustered dyssynchrony
+might show equal variance as dispersed dyssynchrony when compared to
+variance-based dyssynchrony measures, although with very different effects on
+cardiac mechanics [@helm_cardiac_2005]. While CURE can be considered a more
+general measure of dyssynchrony, it has been found to be predictive of CRT response
+in clinical cohorts [@bilchick_cardiac_2008;
+@bilchick_impactmechanicalactivation_2014; @ramachandran_singular_2015]. An
+advantage of CURE over commonly used time-to-peak based indices is that CURE
+utilizes information of the full cardiac cycle. Additionally, considering that
+CURE is derived from the relative positions of included segments and less so on
+their absolute value of strain, CURE is theoretically less sensitive to
+inter-vendor variations of strain measurements. However, despite these
+theoretical advantages of using CURE, the current study shows that CURE had a
+modest performance in identifying LBBB specific mechanical dyssynchrony.
+
+The association between mechanical dyssynchrony, quantified as the systolic
+dyssynchrony index, and myocardial scar has been studied in patients with
+systolic heart failure [@jackson_narrowqrssystolic_2015]. They conclude that 25%
+of patients with narrow QRS (${<}130$ ms) presented with mechanical dyssynchrony,
+despite no difference in scar burden compared to narrow QRS
+patients without mechanical dyssynchrony. Those findings suggest that
+mechanical dyssynchrony in such patients might be secondary to myocardial scar
+rather than electrical dyssynchrony. There is no general agreement upon the
+definition of mechanical dyssynchrony, and the difference in vendor software for
+strain measurements limits straightforward comparisons between studies. CURE has
+been shown to identify a greater magnitude of dyssynchrony (lower CURE values)
+in patients with non-ischemic cardiomyopathy compared to healthy controls
+(0.79$\pm 0.14$ vs 0.97$\pm 0.02$)
+[@taylor_featuretrackingcardiovascularmagnetic_2014]. In a different study, CURE
+in healthy controls volunteers has been shown to be 0.87$\pm0.07$
+[@kowallick_quantitativeassessmentleft_2017]. The current study shows that
+patients with severely reduced LVEF and normal QRS duration have some degree of
+mechanical dyssynchrony even in the absence of scar (median CURE 0.79). This
+would suggest that other factors beyond scar and LBBB contribute to mechanical
+dyssynchrony detected by CURE. Such factors may include variations in pre-load
+and/or afterload, and regional wall motion abnormalities due to chronic ischemia
+or other non-ischemic cardiomyopathies that impair contractile function without
+causing myocardial scar.
+
+While CURE and SSI both displayed group differences between LBBB and controls,
+the current study found no evidence in support of a relationship between either
+CURE or SSI, and QRS duration within LBBB and control groups, respectively.
+CURE and QRS duration have previously been found to be modestly correlated ($r
+= -0.58; p {<}0.001$) in a cohort ($n=43$) of cardiomyopathy patients with
+similar reductions in ejection fraction and prolongation of QRS duration,
+though QRS morphology was not reported [@bilchick_cardiac_2008]. However, when
+only evaluating the correlation between CURE and QRS duration in those patients
+referred for CRT ($n=20$) those authors found that the evidence did not support
+any correlation ($r = -0.40; p=0.08$) [@bilchick_cardiac_2008]. The apparent
+lack of correlation between dyssynchrony and QRS duration is of interest
+considering that current guidelines are still unclear regarding the group of
+patients with intermediate QRS width (QRS 120-149ms). These exploratory results
+add to the notion that there is a complex relationship between electrical and
+mechanical dyssynchrony.
+
+# Image availability
+
+The current study shows that patients with severely
+reduced ejection fraction and normal QRS duration have a baseline level
+of mechanical dyssynchrony that is not attributable to myocardial scarring or prolonged
+depolarization of the myocardium. Consequently, when developing an index of mechanical
+dyssynchrony, specificity for its intended use should be of
+interest. To our knowledge, no study to date has included patients free of
+myocardial scar, with a normal QRS duration, and with severely reduced ejection fraction
+when comparing or developing indices of mechanical dyssynchrony. In order to facilitate
+future research where baseline mechanical dyssynchrony is accounted for, the
+images from the current study are made available online. See the section
+'Availability of data and materials' below.
+
+# Limitations
+
+Identification of the time point for aortic valve opening, and aortic valve closure
+was performed by visual assessment of CMR cine images, and the accuracy of this
+assessment is limited by the temporal resolution of CMR images. However, any
+variations in accuracy would equally affect the analysis of both patient
+groups, and hence should not have a major effect on the overall results. The
+software used for strain analysis reports segmental strain measurements
+according to the AHA 17-segment model. Hence, CURE calculation was limited to Fourier
+transformation applied to six individual myocardial segments in the
+midventricular short-axis slice. The impact of the spatial resolution of
+measurement in CURE quantification has not previously been reported. However,
+it cannot be excluded that quantification of CURE using higher spatial
+resolution could potentially
+influence the results.
+
+# Conclusions
+
+SSI was superior to CURE regarding the ability to discriminate between
+strict LBBB and normal QRS duration among patients with severely reduced
+ejection fraction and no scar. The amount of dyssynchrony in patients with no
+scar, and severely reduced ejection fraction, needs to be taken into account when
+developing and evaluating indices aimed at accurately identifying mechanical
+dyssynchrony amenable to CRT. We suggest that control subjects with normal QRS
+duration, severely reduced ejection fraction, and the absence of myocardial
+scar, be included when developing and evaluating mechanical dyssynchrony
+indices aimed at predicting CRT response.
+
+
+
+
+

@@ -1,0 +1,133 @@
+---
+title: "Diagnostic performance of left ventricular mechanical dyssynchrony indices using cardiovascular magnetic resonance feature tracking"
+author:
+ - "Daniel E Loewenstein MD^1^, Björn Wieslander MD PhD^1^, Einar Heiberg PhD^2^, Jimmy Axelsson MD^1^, Igor Klem MD^3^, Robin Nijveldt MD PhD^4^, Erik B Schelbert MSc MD^5^, Peder Sörensson MD PhD^6^, Andreas Sigfridsson PhD^1^, David G Strauss MD^7^,\nRaymond J Kim MD^8^, Brett D Atwater MD^3,9^, Martin Ugander MD PhD^1,10^"
+ - "^1^Department of Clinical Physiology, Karolinska Institutet, and Karolinska University Hospital, Solna, Stockholm, Sweden"
+ - "^2^Clinical Physiology, Department of Clinical Sciences Lund, Lund University, Skåne University Hospital, Lund, Sweden"
+ - "^3^Division of Cardiology, Duke University Medical Center, Durham, NC, USA"
+ - "^4^Department of Cardiology, Radboud University Medical Center, Nijmegen, the Netherlands"
+ - "^5^Minneapolis Heart Institute East, Allina Health, United Hospital, St. Paul, MN, USA"
+ - "^6^Department of Medicine Solna, Karolinska Institutet, and Department of Cardiology, Karolinska University Hospital, Solna, Stockholm, Sweden"
+ - "^7^Division of Applied Regulatory Science, Office of Clinical Pharmacology, Office of Translational Sciences, Center for Drug Evaluation and Research, U.S. Food and Drug Administration, Silver Spring, MD, USA"
+ - "^8^Duke Cardiovascular Magnetic Resonance Center, Duke University Medical Center, Durham, NC, USA"
+ - "^9^Section of Cardiac Electrophysiology, Inova Heart and Vascular Institute, Fairfax, VA, USA"
+ - "^10^Kolling Institute, Royal North Shore Hospital, and University of Sydney, Sydney, Australia"
+csl: auxilliary/vancouver.csl
+bibliography: auxilliary/library-bibtex-version.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, include = FALSE)
+```
+
+```{r}
+library(dplyr, quietly = TRUE)
+library(ggplot2, quietly = TRUE)
+```
+
+```{r}
+# Set paths
+PROJECT_DIR <- rprojroot::find_rstudio_root_file()
+RAW_DATA_DIR <- file.path(PROJECT_DIR, "analysis", "data", "raw_data")
+DERIVED_DATA_DIR <- file.path(PROJECT_DIR, "analysis", "data", "derived_data")
+FIG_DIR <- file.path(PROJECT_DIR, "analysis", "figures")
+```
+
+```{r}
+dillacs <- readRDS(file.path(DERIVED_DATA_DIR, "dyssynchrony_data.Rds"))
+stats <- readRDS(file.path(DERIVED_DATA_DIR, "statistics.Rds"))
+figs  <- readRDS(file.path(DERIVED_DATA_DIR, "figs.Rds"))
+source(file.path(PROJECT_DIR, "R", "offset2groups.R"))
+```
+
+```{r}
+pval_print <- function(x) {
+    if (x < 0.001)
+        paste("\U003C", "0.001", sep = "")
+    else if (x < 0.01)
+        sprintf("=%.3f", x)
+    else
+        sprintf("=%.2f", x)
+}
+```
+
+```{r}
+LBBB <- filter(dillacs, lbbb1_control0 == "LBBB")
+Control <- filter(dillacs, lbbb1_control0 == "Control")
+
+print_m_iqr <- function(var, data) {
+    d <- data[[var]]
+    m <- median(d)
+    q1 <- quantile(d, 0.25)
+    q3 <- quantile(d, 0.75)
+    
+    if (var == "cure") {
+        sprintf("%.2f [%.2f-%.2f]", m, q1, q3)
+    } else {
+        sprintf("%.1f [%.1f-%.1f]", m, q1, q3)
+    }
+}
+
+print_auc_ci <- function(var) {
+    auc <- stats[[var]]$auc
+    ci_lower <- stats[[var]]$auc_ci["2.5%"]
+    ci_upper <- stats[[var]]$auc_ci["97.5%"]
+    sprintf("%.2f [%.2f-%.2f]", auc, ci_lower, ci_upper)
+}
+
+cure_wilcox_pval <- (wilcox.test(cure ~ lbbb1_control0, data = dillacs))$p.value
+ssi_wilcox_pval  <- (wilcox.test(ssi ~ lbbb1_control0, data = dillacs))$p.value
+
+as_percent <- function(x) 100*x
+
+stats$cure$sens <- as_percent(stats$cure$sens)
+stats$cure$spec <- as_percent(stats$cure$spec)
+stats$cure$cisens <- as_percent(stats$cure$cisens)
+stats$cure$cispec <- as_percent(stats$cure$cispec)
+stats$ssi$sens <- as_percent(stats$ssi$sens)
+stats$ssi$spec <- as_percent(stats$ssi$spec)
+stats$ssi$cisens <- as_percent(stats$ssi$cisens)
+stats$ssi$cispec <- as_percent(stats$ssi$cispec)
+
+```
+
+\newpage
+
+# Abstract
+
+*Background:* Cardiac imaging-based indices of left ventricular (LV) mechanical
+dyssynchrony have limited accuracy for predicting the response to cardiac
+resynchronization therapy (CRT). The aim of the study was to evaluate the
+diagnostic performance of mechanical dyssynchrony indices in a study population
+of patients with severely reduced ejection fraction and no LV myocardial scar
+assessed by cardiovascular magnetic resonance (CMR), and either left bundle
+branch block (LBBB) or normal QRS duration.
+*Methods:* We retrospectively identified `r length(unique(dillacs$id))`
+patients from three centers, with LV ejection fraction ${\le}{35}$%, no scar by
+CMR late gadolinium enhancement, and either normal electrocardiographic QRS
+duration (${<}120$ms) and normal frontal plane electrical axis (-30 to
++90 degrees) (control, `r sprintf("n=%d", nrow(Control))`), or LBBB by Strauss'
+criteria (LBBB, `r sprintf("n=%d", nrow(LBBB))`). The CMR image data from these
+subjects is made publicly available as part of this publication. CMR feature
+tracking was used to derive circumferential strain in a midventricular
+short-axis cine image. Using circumferential strain, mechanical dyssynchrony
+was quantified as the circumferential uniformity ratio estimate (CURE) and the
+systolic stretch index (SSI), respectively.
+*Results:* Both CURE and SSI resulted in measures of mechanical dyssynchrony that were more
+severe (lower CURE, higher SSI) in LBBB compared to controls
+(CURE, median [interquartile range], `r print_m_iqr("cure", LBBB)` vs `r print_m_iqr("cure", Control)`,
+p`r pval_print(cure_wilcox_pval)`; 
+SSI `r print_m_iqr("ssi", LBBB)` vs `r print_m_iqr("ssi", Control)`,
+p`r pval_print(ssi_wilcox_pval)`). 
+SSI outperformed CURE in the ability to discriminate between LBBB and controls
+(area under the receiver operating characteristics curve [95% confidence interval]
+`r print_auc_ci("ssi")` vs `r print_auc_ci("cure")`, 
+p`r pval_print(stats$compare_auc$p.value)`; 
+sensitivity `r sprintf("%.0f [%.0f-%.0f]", stats$ssi$sens, stats$ssi$cisens["2.5%"], stats$ssi$cisens["97.5%"])` 
+vs `r sprintf("%.0f [%.0f-%.0f] %%", stats$cure$sens, stats$cure$cisens["2.5%"], stats$cure$cisens["97.5%"])`,
+`r sprintf("p%s", pval_print(stats$sens_xmcnemar))`; specificity `r sprintf("%.0f [%.0f-%.0f]", stats$ssi$spec, stats$ssi$cispec["2.5%"], stats$ssi$cispec["97.5%"])`
+vs `r sprintf("%.0f [%.0f-%.0f] %%", stats$cure$spec, stats$cure$cispec["2.5%"], stats$cure$cispec["97.5%"])`,
+`r sprintf("p%s", pval_print(stats$spec_xmcnemar))`).
+*Conclusions:* The ability to discriminate between LBBB and normal QRS duration
+among patients with severely reduced ejection fraction and no scar was fair for
+CURE and excellent for SSI.

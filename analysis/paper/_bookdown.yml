@@ -1,0 +1,5 @@
+book_filename: "Loewenstein et al. - Diagnostic performance of left ventricular mechanical dyssynchrony indices using CMR feature tracking"
+rmd_files:
+  word: ["abstract.Rmd", "background.Rmd", "methods.Rmd", "results.Rmd", "discussion.Rmd", "appendix.Rmd"]
+  latex: ["abstract-pdf.Rmd", "background.Rmd", "methods.Rmd", "results.Rmd", "discussion.Rmd", "appendix-pdf.Rmd"]
+new_session: yes

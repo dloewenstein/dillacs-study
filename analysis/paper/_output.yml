@@ -1,0 +1,12 @@
+bookdown::pdf_book:
+    toc: false
+    keep_tex: true
+    citation_package: natbib
+    base_format: rticles::elsevier_article
+bookdown::html_document2:
+    toc: false
+    numbering: false
+bookdown::word_document2:
+    toc: false
+    reference_docx: reference.docx
+    number_sections: false

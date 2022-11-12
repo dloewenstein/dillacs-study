@@ -1,0 +1,208 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, include = FALSE)
+```
+
+```{r}
+library(dplyr, quietly = TRUE)
+library(ggplot2, quietly = TRUE)
+```
+
+
+```{r}
+# Set paths
+PROJECT_DIR <- rprojroot::find_rstudio_root_file()
+RAW_DATA_DIR <- file.path(PROJECT_DIR, "analysis", "data", "raw_data")
+DERIVED_DATA_DIR <- file.path(PROJECT_DIR, "analysis", "data", "derived_data")
+FIG_DIR <- file.path(PROJECT_DIR, "analysis", "figures")
+```
+
+```{r}
+dillacs <- readRDS(file.path(DERIVED_DATA_DIR, "dyssynchrony_data.Rds"))
+stats <- readRDS(file.path(DERIVED_DATA_DIR, "statistics.Rds"))
+figs  <- readRDS(file.path(DERIVED_DATA_DIR, "figs.Rds"))
+source(file.path(PROJECT_DIR, "R", "offset2groups.R"))
+```
+
+```{r}
+pval_print <- function(x) {
+    if (x < 0.001)
+        paste("\U003C", "0.001", sep = "")
+    else if (x < 0.01)
+        sprintf("=%.3f", x)
+    else
+        sprintf("=%.2f", x)
+}
+```
+
+```{r}
+# Taken from LP-figures
+
+format_thresh <- function(x) {
+    if (x < 1)
+        sprintf("Threshold: %.2f", x)
+    else
+        sprintf("Threshold: %.1f", x)
+}
+
+format_thresh <- Vectorize(format_thresh)
+
+text_height <- 0.25
+text_size   <- 4
+```
+
+```{r}
+LBBB <- filter(dillacs, lbbb1_control0 == "LBBB")
+Control <- filter(dillacs, lbbb1_control0 == "Control")
+
+as_percent <- function(x) 100*x
+
+stats$cure$sens <- as_percent(stats$cure$sens)
+stats$cure$spec <- as_percent(stats$cure$spec)
+stats$cure$cisens <- as_percent(stats$cure$cisens)
+stats$cure$cispec <- as_percent(stats$cure$cispec)
+stats$ssi$sens <- as_percent(stats$ssi$sens)
+stats$ssi$spec <- as_percent(stats$ssi$spec)
+stats$ssi$cisens <- as_percent(stats$ssi$cisens)
+stats$ssi$cispec <- as_percent(stats$ssi$cispec)
+
+get_frequent <- function(x) {
+    if (is.character(x))
+        res <- table(unlist(dillacs[[x]]))
+    else
+        res <- table(unlist(x))
+    
+    as.numeric(names(res[which.max(res)]))
+}
+
+img_prms <- vector("list", 6)
+names(img_prms) <- c("TE", "TR", "flip_angle", "slice_mm", "t_res", "segment_version")
+
+img_prms$TE <- get_frequent("echo_time")
+img_prms$TR <- get_frequent("rep_time")
+img_prms$flip_angle <- get_frequent("flip_angle")
+img_prms$slice_mm   <- get_frequent("slice_thickness")
+img_prms$t_res      <- get_frequent(dillacs$t_max / unlist(dillacs$t_incr))
+img_prms$segment_version <- dillacs$program_version[[1]]
+```
+
+# Methods
+
+This is an observational case-control study where patients were
+retrospectively identified by cross-referencing the CMR and electrocardiography
+(ECG) databases from three centers (Duke University Medical Center, NC, USA;
+Pittsburgh University Medical Center, PA, USA; and Karolinska University
+Hospital, Stockholm, Sweden). The study was approved by the local
+human subject research ethics committee at each site, and all subjects either
+provided written informed consent or were included following a retrospective
+waiver of informed consent provided by the local ethics committee.
+
+## Subject selection
+
+Subjects considered for inclusion in the present study had a LV
+ejection fraction ${\le}35\%$, no scar by CMR late gadolinium enhancement
+(LGE), CMR cine images in a LV short-axis stack, and either normal ECG QRS
+duration (${<}120$ ms) and frontal plane electrical axis (-30 to +90 degrees,
+controls, n=`r nrow(Control)`), or LBBB (n=`r nrow(LBBB)`) defined by Strauss'
+strict ECG criteria, defined as a terminal negative deflection in lead $V_1$
+and $V_2$ (QS or rS configuration), a QRS duration ${\ge}140$ ms for men and
+${\ge}130$ ms for women, and the presence of mid-QRS notching or slurring in 
+${\ge}2$ of leads $V_1,~V_2,~V_5,~V_6$, I and aVL [@strauss_definingleftbundle_2011].
+Subjects were excluded if they had a history of congenital heart disease, CMR evidence
+of myocardial storage disease, atrial fibrillation, prior open heart surgery,
+or LV septal wall flattening indicative of clinically significant pulmonary
+hypertension. The following baseline characteristics were collected: age, sex,
+height, weight, body surface area (BSA), body mass index (BMI), and CMR
+measures of LV volumes, function and mass. Among the patients who met the
+inclusion criteria (n=87), patients were excluded due to having Takotsubo
+cardiomyopathy (n=1), atrial fibrillation discovered at time of feature
+tracking analysis (n=1), or missing or insufficient number of diagnostic quality
+CMR cine images (n=5). As a result, the final study group included
+`r nrow(dillacs)` patients.
+
+## CMR image acquisition
+
+All imaging was performed with clinically available scanners at the respective
+centers. Scanners included 3T (Siemens Verio, Erlangen, Germany) and 1.5T
+systems (Siemens Avanto, Espree or Aera, Erlangen, Germany, or Philips Intera,
+Best, the Netherlands), all using ECG gating and phased-array receiver coils.
+Typical acquisition parameters for cine images were: repetition time `r round(img_prms$TR,0)` ms,
+echo time `r round(img_prms$TE, 1)` ms, flip angle `r img_prms$flip_angle` degrees, 
+matrix 190 x 190, slice thickness `r img_prms$slice_mm` mm,
+and temporal resolution `r img_prms$t_res` frames per cardiac cycle. 
+Clinical reports of cardiac viability assessment were reviewed for mention of 
+any myocardial scar by LGE.
+
+## Image and strain analysis
+
+Cine CMR images exported for offline myocardial strain analysis performed by an
+observer using commercially available software for CMR feature
+tracking (Segment version `r img_prms$segment_version`) Medviso, Lund, Sweden)
+[@morais_cardiovascularmagneticresonance_2017; @heyde_elastic_2013]. All analysis was performed
+blinded to ECG classification. Endocardial and epicardial borders, excluding
+papillary muscles and trabeculations, were manually delineated in the
+end-diastolic reference timeframe. The end-diastolic reference timeframe was
+set to the timeframe immediately following halting of the circumferential
+expansion and longitudinal lengthening of the LV during late diastole as
+viewed in a three chamber, long-axis, and short-axis slice. This was due to
+observation that there was often a delay in the closure of the mitral valve,
+which otherwise has commonly been used to define end-diastole. The delineation was
+performed in a single midventricular short-axis slice. A non-rigid elastic
+registration strategy was used by the software to measure myocardial strain over
+time. For regional strain assessment, the area encompassed by the endo- and
+epicardial borders was segmented into regions of interest according six segments
+of the American Heart Association 17-segment model. In short-axis images, the
+location of regional segments was determined using an angle relative to the
+right ventricular anterior insertion point. Circumferential strain was
+evaluated from the Lagrangian strain tensor between adjacent points. Mechanical
+dyssynchrony was quantified using the circumferential uniformity ratio estimate
+(CURE) [@helm_cardiac_2005; @leclercq_systolicimprovementmechanical_2002;
+@bilchick_cardiac_2008]
+and the systolic stretch index (SSI)
+[@gorcsan_systolicstretchcharacterizes_2018; @lumens_differentiatingelectromechanicalnon_2015].
+In short, CURE is derived
+from Fourier transformation of the spatial distribution of strain from
+myocardial segments averaged over the number of short axis slices. CURE is then
+calculated as
+$$CURE = \frac{1}{n} \sum_{t=1}^{n}{\sqrt{\frac{\sum{S_0(t)}}{\sum{S_0(t)} + \sum{S_1(t)}}}}$$
+where $S_0$ is the zero order, and $S_1$ is the first order term in the fourier
+transformation, and $n$ is the number of timeframes covering the cardiac cycle.
+CURE ranges between 0 (perfect dyssynchrony) and 1 (perfect synchrony).
+SSI was originally developed through computer simulations
+[@lumens_differentiatingelectromechanicalnon_2015], and later presented in a
+slightly simplified version for use in echocardiography [@gorcsan_systolicstretchcharacterizes_2018] and is 
+calculated as the sum of LV lateral wall systolic pre-stretch
+(SPS) and septal rebound stretch (SRS).
+$$SSI = \frac{SPS_{antlat} + SPS_{inflat}}{2} + \frac{SRS_{antsept} + SRS_{infsept}}{2}$$
+Systolic pre-stretch is defined as the sum of LV lateral wall stretch before aortic
+valve opening, averaged over the anterolateral and inferolateral segment. Septal
+rebound stretch is defined as the sum of septal stretch following early systolic
+shortening and before aortic valve closure, averaged over the anteroseptal and 
+inferoseptal segment.
+
+## Statistical analysis
+
+Categorical data are reported as number and percentages. Continuous variables
+are reported as median [interquartile range]. For continuous variables, groups
+were compared using the Wilcoxon signed-rank test. Bivariate correlation was
+examined by Spearman's $\rho$ correlation coefficient.
+Univariable logistic regression models with LBBB status as the dependent
+variable were fitted separately for the two dyssynchrony indices. Specificity,
+sensitivity, discriminatory performance, and cut-off values were derived from
+receiver-operating characteristics (ROC) analysis using the Youden's index.
+Multivariable linear regression models fit separately for each dyssynchrony
+index in LBBB, and controls respectively, were used to test for associations
+with covariates age, LV end-diastolic volume index (LVEDVI), LV mass index
+(LVMI), and sex, indicating any need for covariate-adjusted, or
+covariate-specific ROC curves. Nonlinearities were entertained by use of
+restricted cubic splines, as were interactions between LVEDVI, and LVMI with
+sex, respectively. Areas under the paired ROC curves were compared using
+nonparametric stratified bootstrapping. Bootstrapped CIs were derived from 4000
+replicates and calculated using the percentile method. A two-sided $p < 0.05$
+was considered statistically significant. Data processing and statistical
+analysis were performed in the R statistical programming environment
+`r getRversion()` [@rcoreteam_r:_2017], using package dplyr 
+`r packageVersion("dplyr")` [@wickham_dplyr:_2017] for data transformation, ggplot2 
+`r packageVersion("ggplot2")` [@wickham_ggplot2:_2009] for graphical
+visualizations, pROC `r packageVersion("pROC")` [@robin_proc:_2011] for ROC
+analysis, rms `r packageVersion("rms")` for regression modeling, and knitr 
+`r packageVersion("knitr")` [@xie_knitr:_2017] for reproducible documentation.

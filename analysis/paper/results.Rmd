@@ -1,0 +1,222 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, include = FALSE, warning = FALSE, message = FALSE)
+```
+
+```{r}
+library(Hmisc)
+library(rms)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+```
+
+```{r}
+# Set paths
+PROJECT_DIR <- rprojroot::find_rstudio_root_file()
+RAW_DATA_DIR <- file.path(PROJECT_DIR, "analysis", "data", "raw_data")
+DERIVED_DATA_DIR <- file.path(PROJECT_DIR, "analysis", "data", "derived_data")
+FIG_DIR <- file.path(PROJECT_DIR, "analysis", "figures")
+```
+
+```{r}
+dillacs <- readRDS(file.path(DERIVED_DATA_DIR, "dyssynchrony_data.Rds"))
+dillacs <- dillacs %>% 
+    mutate(lbbb1_control0 = factor(lbbb1_control0, levels = c("Control", "LBBB")))
+
+stats <- readRDS(file.path(DERIVED_DATA_DIR, "statistics.Rds"))
+figs  <- readRDS(file.path(DERIVED_DATA_DIR, "figs.Rds"))
+source(file.path(PROJECT_DIR, "R", "offset2groups.R"))
+```
+
+```{r}
+format_thresh <- function(x, xmin, xmax) {
+    if (x < 1)
+        sprintf("Threshold: %.2f [%.2f, %.2f]", x, xmin, xmax)
+    else
+        sprintf("Threshold: %.1f [%.1f, %.1f]", x, xmin, xmax)
+}
+
+format_thresh <- Vectorize(format_thresh)
+
+text_height <- 0.25
+text_size   <- 4
+safe_colors <- RColorBrewer::brewer.pal(3, "PuOr")[c(1, 3)]
+```
+
+# Results
+
+```{r}
+male_n <- c(sprintf("%s (%s%%)", sum(dillacs$Gender=="M"), (sum(dillacs$Gender == "M")/length(dillacs$Gender))*100))
+
+female_perc <- c(sprintf("%.0f%%", (sum(dillacs$Gender ==
+"F")/length(dillacs$Gender))*100))
+
+sumstats <- summaryM(Age + cure + ssi + EDVI + LVMI + Gender + BMI + EDV + LVEF + QRSDur
+              + LVM ~ lbbb1_control0, 
+              data = dillacs, test = TRUE, overall = TRUE)
+
+get_pval <- function(x, data = sumstats) {
+    format.pval(data$results$.ALL.$testresults[[c(deparse(substitute(x)), "P")]], eps=0.001)
+}
+
+get_median <- function(x, group, dig = 1, data = sumstats) {
+    round(data$results$.ALL.$stats[[deparse(substitute(x))]][group, "0.500"], dig)
+}
+
+print_iqr <- function(x, group=3, dig = 1, data = sumstats) {
+    sprintf(paste0("[%.", dig,"f-%.",dig,"f]"),
+            data$results$.ALL.$stats[[deparse(substitute(x))]][group, "0.250"],
+            data$results$.ALL.$stats[[deparse(substitute(x))]][group, "0.750"])
+}
+
+```
+
+## Subject characteristics
+
+The characteristics of patients included in the study 
+(n=`r nrow(dillacs)`, `r female_perc` female) are presented in
+Table \@ref(tab:tableone). Characteristics were similar in the two groups except for
+older age and greater LV mass in subjects with LBBB.
+
+```{r}
+dysstats <- summaryM(cure + ssi ~ lbbb1_control0, 
+              data = dillacs, test = TRUE, overall = TRUE)
+
+formals(get_pval) <- alist(x=, data = dysstats)
+formals(get_median) <- alist(x=, group=, dig = 1, data = dysstats)
+formals(print_iqr) <- alist(x=, group = 3, dig = 1, data = dysstats)
+
+get_OR <- function(coef, data, inv = FALSE, dig = 2) {
+    res <- exp(data[["coef.ci"]][deparse(substitute(coef)), "coef"])
+    if(inv) {
+        res <- 1/res
+    }
+   format(round(res, dig), nsmall = 2)
+}
+
+get_OR_ci <- function(coef, data, inv = FALSE, dig = 2) {
+    res <- exp(data[["coef.ci"]][deparse(substitute(coef)), c("2.5%", "97.5%")])
+    if(inv) {
+        res <- 1/res
+        res <- c(res[2], res[1])
+    }
+    sprintf(paste0("[95%% CI: %.", dig,"f-%.",dig,"f", "]"), res[1], res[2])
+}
+
+print_cor <- function(group, var) {
+    group = deparse(substitute(group))
+    var   = deparse(substitute(var))
+    r <- stats[[var]]$cor[[group]]$estimate
+    ci <- stats[[var]]$cor[[group]]$conf.int
+    p  <- stats[[var]]$cor[[group]]$p.value
+    p   <- ifelse(p < 0.001, 
+                  format.pval(p, eps = 0.001, digits = 3),
+                  paste0("=", format.pval(p, eps = 0.001, digits = 3))
+                  )
+
+    sprintf("$r_{s}$ = %.2f [95%% CI: %.2f-%.2f]; p%s",
+            r, ci[1], ci[2], p)
+}
+
+print_median_ci <- function(var) {
+    if(var == "cure") {
+        sprintf("%.2f [95%% CI: %.2f-%.2f]",
+                stats[[var]]$dys_median_ci$t0,
+                stats[[var]]$dys_median_ci$percent[4],
+                stats[[var]]$dys_median_ci$percent[5])
+    } else {
+        sprintf("%.1f [95%% CI: %.1f-%.1f]",
+                stats[[var]]$dys_median_ci$t0,
+                stats[[var]]$dys_median_ci$percent[4],
+                stats[[var]]$dys_median_ci$percent[5])
+    }
+}
+
+print_lrt <- function(var) {
+    chi <- stats[[var]]$modstats["Model L.R."]
+    df  <- stats[[var]]$modstats["d.f."]
+    p   <- stats[[var]]$modstats["P"]
+    p   <- ifelse(p < 0.001, 
+                  format.pval(p, eps = 0.001, digits = 3),
+                  paste0("=", format.pval(p, eps = 0.001, digits = 3))
+                  )
+    sprintf("$\\chi^2(%.1f)$, $df$=%.0f, p%s", chi, df, p)
+}
+
+print_mchisq <- function(var) {
+    chi <- stats[[var]]$fit.anova[" Nonlinear", "Chi-Square"]
+    df  <- stats[[var]]$fit.anova[" Nonlinear","d.f."]
+    p   <- stats[[var]]$fit.anova[" Nonlinear","P"]
+    p   <- ifelse(p < 0.001,
+                  format.pval(p, eps = 0.001, digits = 3),
+                  paste0("=", format.pval(p, eps = 0.001, digits = 3))
+                  )
+    sprintf("$\\chi^2(%.1f)$, $df$=%.0f, p%s", chi, df, p)
+}
+
+print_chisq <- function(var) {
+    res <- stats[[var]]$fit.anova[var, c("Chi-Square", "P")]
+    p   <- ifelse(res[2] < 0.001,
+                  format.pval(res[2], eps = 0.001, digits = 3),
+                  paste0("=", format.pval(res[2], eps = 0.001, digits = 3))
+                  )
+    sprintf("%.2f (p%s)", res[1], p)
+}
+
+print_gof <- function(var) {
+    ss <- stats[[var]]$fit.gof["Sum of squared errors"]
+    p  <- stats[[var]]$fit.gof["P"]
+    p  <- ifelse(p < 0.001,
+                 format.pval(p, eps = 0.001, digits = 3),
+                 paste0("=", format.pval(p, eps = 0.001, digits = 3))
+                 )
+    sprintf("%.2f (p%s)",ss, p)
+}
+```
+
+```{r}
+cure_loc_shift <- stats$cure$wilcox
+ssi_loc_shift <- stats$ssi$wilcox
+```
+
+
+## Dyssynchrony measurements
+
+Both CURE and SSI showed group differences between LBBB and controls (Figure \@ref(fig:dysboxplot)).
+Consistent with a greater amount of mechanical dyssynchrony in LBBB, CURE was
+lower in LBBB compared to controls
+(`r get_median(cure, 2, 2)` `r print_iqr(cure, 2, 2)` vs  `r get_median(cure, 1, 2)` `r print_iqr(cure, 1, 2)`, `r sprintf("p<%.3f", ifelse(cure_loc_shift$p.value < 0.001, 0.001,  cure_loc_shift$p.value))`), 
+and SSI was higher in LBBB compared to controls
+(`r get_median(ssi, 2)` `r print_iqr(ssi, 2)` vs  `r get_median(ssi, 1)`
+`r print_iqr(ssi, 1)`, 
+`r sprintf("p<%.3f", ifelse(ssi_loc_shift$p.value < 0.001, 0.001, ssi_loc_shift$p.value))`).
+Compared to CURE, SSI had a greater area under the ROC curve for detecting
+mechanical dyssynchrony associated with strict LBBB 
+(`r sprintf("%.2f [95%% CI: %.2f-%.2f]", stats$ssi$auc, stats$ssi$auc_ci["2.5%"], stats$ssi$auc_ci["97.5%"])`
+vs
+`r sprintf("%.2f [95%% CI: %.2f-%.2f]", stats$cure$auc, stats$cure$auc_ci["2.5%"], stats$cure$auc_ci["97.5%"])`,
+p`r format.pval(stats$compare_auc$p.value, eps = 0.001)`, Figure \@ref(fig:dysrocplot)), and this corresponded to a higher sensitivity and specificity for SSI compared to CURE
+(Figure \@ref(fig:performanceplot)). The odds ratio (OR) for identifying LBBB for SSI was `r get_OR(ssi, stats$ssi)`
+`r get_OR_ci(ssi, stats$ssi)` per 1 percentage unit increase in SSI value, and for CURE was 
+`r get_OR(cure, stats$cure)` `r get_OR_ci(cure, stats$cure)` per 
+0.10 decrease in CURE value. In evaluating the need for covariate-adjusted and/or
+covariate-specific ROC curves, linear regression models were used to test the
+association between dyssynchrony indices and covariates: age, LVEDVI, LVMI, and
+sex, allowing for interactions between LVMI and LVEDVI, with sex, respectively.
+No evidence was found in support of an association between dyssynchrony indices
+and covariates in controls, or between CURE and covariates in LBBB. Furthermore,
+neither CURE nor SSI associated with QRS duration in either LBBB or controls
+(p ${\ge}0.4$ for all). There was an association between SSI and age, keeping other
+covariates fixed, in LBBB. This suggests that the discriminatory ability of SSI
+might vary with respect to age. For purposes of clarity, the unadjusted ROC
+curve is presented.
+
+## CMR image availability
+
+All CMR images analyzed as part of the current study are made available online
+(https://figshare.com/s/9c8b74d70b9aee62e5f2). Among the individual CMR exams
+(n=80) the  majority were performed on a Siemens scanner (n=75) and only a few
+on a Philips scanner (n=5), all contain a cine short-axis stack, while most
+also contain cine 2-chamber (n=78), 3-chamber (n=79), and 4-chamber images (n=79). As
+per the inclusion criteria all patients were verified to be free of myocardial
+scar by LGE CMR.

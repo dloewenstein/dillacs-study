@@ -1,0 +1,90 @@
+---
+title: "Dyssynchrony analysis"
+author: "Daniel Loewenstein"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r}
+library(purrr)
+library(tidyr)
+library(dplyr)
+library(furrr)
+```
+
+```{r}
+plan(multicore)
+```
+
+```{r}
+# Set paths
+PROJECT_DIR <- rprojroot::find_rstudio_root_file()
+RAW_DATA_DIR <- file.path(PROJECT_DIR, "analysis", "data", "raw_data")
+DERIVED_DATA_DIR <- file.path(PROJECT_DIR, "analysis", "data", "derived_data")
+FIG_DIR <- file.path(PROJECT_DIR, "analysis", "figures")
+```
+
+```{r}
+source(file.path(PROJECT_DIR, "R/strain_cure.R"))
+source(file.path(PROJECT_DIR, "R/strain_ssi.R"))
+```
+
+## Load clean data
+
+```{r}
+dillacs <- readRDS(file.path(DERIVED_DATA_DIR, "cleaned_data.Rds"))
+```
+
+## Part 1 of dyssynchrony analysis, Uniformity ratio estimates
+
+Calculate the circumferential uniformity ratio estimate (CURE) and radial 
+uniformity ratio estimate (RURE) as well as their respective version using 
+singular value decomposition (SVD) as preprocessing.
+
+```{r}
+segment_order <-
+    c("anteroseptal",
+      "inferoseptal",
+      "inferior",
+      "inferolateral",
+      "anterolateral",
+      "anterior")
+
+dillacs$cure <- 
+    map2_dbl(dillacs$sax_segmentcirc_mid,
+             dillacs$avc_tfind,
+             ~strain_cure(
+                 select(.x, -time), 
+                 limit = .y,
+                 order = segment_order
+                 )
+             )
+
+dillacs$ssi <-
+    pmap_dbl(
+        list(data = map(dillacs$sax_segmentcirc_mid, select, -time),
+             time = map(dillacs$sax_segmentcirc_mid, select, time),
+             time_avo = dillacs$avo_tfind,
+             time_avc = dillacs$avc_tfind),
+        strain_ssi,
+        septal_segments = c("anteroseptal", "inferoseptal"),
+        lateral_segments = c("anterolateral", "inferolateral")
+    )
+
+```
+
+```{r}
+saveRDS(dillacs, file.path(DERIVED_DATA_DIR, "dyssynchrony_data.Rds"))
+```
+
