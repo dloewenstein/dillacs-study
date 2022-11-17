@@ -1,10 +1,7 @@
 ---
 title: Diagnostic performance of left ventricular mechanical dyssynchrony indices using CMR feature tracking
-author: Daniel E Loewenstein MD, Björn Wieslander MD PhD, Einar Heiberg PhD, Jimmy Axelsson MD, Igor Klem MD, Robin Nijveldt MD PhD, Erik B Schelbert MSc MD, Peder Sörensson MD PhD, Andreas Sigfridsson PhD, David G Strauss MD PhD, Raymond Kim MD, Brett D Atwater MD, Martin Ugander MD PhD
+author: Daniel E Loewenstein MD, Björn Wieslander MD PhD, Einar Heiberg PhD, Jimmy Axelsson MD, Igor Klem MD, Robin Nijveldt MD PhD, Erik B Schelbert MSc MD, Peder Sörensson MD PhD, Andreas Sigfridsson PhD, David G Strauss MD PhD, Raymond J Kim MD, Brett D Atwater MD, Martin Ugander MD PhD
 ---
-
-Diagnostic performance of left ventricular mechanical dyssynchrony indices using CMR feature tracking
-=====================================================================================================
 
 Instructions
 ------------
