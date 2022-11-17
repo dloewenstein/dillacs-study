@@ -34,7 +34,7 @@ author:
       footnote: 1
 address:
     - code: ki-ks
-      address: "Department of Clinical Physiology, Karolinska Institutet, and Karolinska University Hospital, Solna, Stockholm, Sweden"
+      address: "Department of Clinical Physiology, Karolinska University Hospital, and Karolinska Institutet, Solna, Stockholm, Sweden"
     - code: lund
       address: "Clinical Physiology, Department of Clinical Sciences Lund, Lund University, Skåne University Hospital, Lund, Sweden"
     - code: duke

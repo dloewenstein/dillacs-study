@@ -2,7 +2,7 @@
 title: "Diagnostic performance of left ventricular mechanical dyssynchrony indices using cardiovascular magnetic resonance feature tracking"
 author:
  - "Daniel E Loewenstein MD^1^, Björn Wieslander MD PhD^1^, Einar Heiberg PhD^2^, Jimmy Axelsson MD^1^, Igor Klem MD^3^, Robin Nijveldt MD PhD^4^, Erik B Schelbert MSc MD^5^, Peder Sörensson MD PhD^6^, Andreas Sigfridsson PhD^1^, David G Strauss MD^7^,\nRaymond J Kim MD^8^, Brett D Atwater MD^3,9^, Martin Ugander MD PhD^1,10^"
- - "^1^Department of Clinical Physiology, Karolinska Institutet, and Karolinska University Hospital, Solna, Stockholm, Sweden"
+ - "^1^Department of Clinical Physiology, Karolinska University Hospital, and Karolinska Institutet, Solna, Stockholm, Sweden"
  - "^2^Clinical Physiology, Department of Clinical Sciences Lund, Lund University, Skåne University Hospital, Lund, Sweden"
  - "^3^Division of Cardiology, Duke University Medical Center, Durham, NC, USA"
  - "^4^Department of Cardiology, Radboud University Medical Center, Nijmegen, the Netherlands"
