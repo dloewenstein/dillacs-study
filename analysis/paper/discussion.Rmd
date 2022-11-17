@@ -132,7 +132,7 @@ patients with intermediate QRS width (QRS 120-149ms). These exploratory results
 add to the notion that there is a complex relationship between electrical and
 mechanical dyssynchrony.
 
-# Image availability
+## Image availability
 
 The current study shows that patients with severely
 reduced ejection fraction and normal QRS duration have a baseline level
@@ -146,7 +146,7 @@ future research where baseline mechanical dyssynchrony is accounted for, the
 images from the current study are made available online. See the section
 'Availability of data and materials' below.
 
-# Limitations
+## Limitations
 
 Identification of the time point for aortic valve opening, and aortic valve closure
 was performed by visual assessment of CMR cine images, and the accuracy of this
@@ -173,8 +173,3 @@ dyssynchrony amenable to CRT. We suggest that control subjects with normal QRS
 duration, severely reduced ejection fraction, and the absence of myocardial
 scar, be included when developing and evaluating mechanical dyssynchrony
 indices aimed at predicting CRT response.
-
-
-
-
-
