@@ -214,9 +214,9 @@ curve is presented.
 ## CMR image availability
 
 All CMR images analyzed as part of the current study are made available online
-(https://figshare.com/s/9c8b74d70b9aee62e5f2). Among the individual CMR exams
-(n=80) the  majority were performed on a Siemens scanner (n=75) and only a few
-on a Philips scanner (n=5), all contain a cine short-axis stack, while most
-also contain cine 2-chamber (n=78), 3-chamber (n=79), and 4-chamber images (n=79). As
-per the inclusion criteria all patients were verified to be free of myocardial
-scar by LGE CMR.
+(doi: [10.6084/m9.figshare.15155596](https://doi.org/10.6084/m9.figshare.15155596)).
+Among the individual CMR exams (n=80) the majority were performed on a Siemens
+scanner (n=75) and only a few on a Philips scanner (n=5), all contain a cine
+short-axis stack, while most also contain cine 2-chamber (n=78), 3-chamber
+(n=79), and 4-chamber images (n=79). As per the inclusion criteria all patients
+were verified to be free of myocardial scar by LGE CMR.
