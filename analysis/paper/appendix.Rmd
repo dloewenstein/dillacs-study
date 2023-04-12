@@ -40,6 +40,7 @@ assignInNamespace("formatCons", formatCons, ns = "Hmisc")
 **CURE:** Circumferential Uniformity Ratio Estimate\
 **ECG:** Electrocardiography\
 **HF:** Heart Failure\
+**IVCD:** Nonspecific intraventricular conduction delay\
 **LBBB:** Left Bundle Branch Block\
 **LGE:** Late Gadolinium Enhancement\
 **LV:** Left ventricular\

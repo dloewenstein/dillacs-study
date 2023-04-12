@@ -158,7 +158,7 @@ dyssynchrony was quantified using the circumferential uniformity ratio estimate
 (CURE) [@helm_cardiac_2005; @leclercq_systolicimprovementmechanical_2002;
 @bilchick_cardiac_2008]
 and the systolic stretch index (SSI)
-[@gorcsan_systolicstretchcharacterizes_2018; @lumens_differentiatingelectromechanicalnon_2015].
+[@gorcsan_systolicstretchcharacterizes_2019; @lumens_differentiatingelectromechanicalnon_2015].
 In short, CURE is derived
 from Fourier transformation of the spatial distribution of strain from
 myocardial segments averaged over the number of short axis slices. CURE is then
@@ -169,7 +169,7 @@ transformation, and $n$ is the number of timeframes covering the cardiac cycle.
 CURE ranges between 0 (perfect dyssynchrony) and 1 (perfect synchrony).
 SSI was originally developed through computer simulations
 [@lumens_differentiatingelectromechanicalnon_2015], and later presented in a
-slightly simplified version for use in echocardiography [@gorcsan_systolicstretchcharacterizes_2018] and is 
+slightly simplified version for use in echocardiography [@gorcsan_systolicstretchcharacterizes_2019] and is 
 calculated as the sum of LV lateral wall systolic pre-stretch
 (SPS) and septal rebound stretch (SRS).
 $$SSI = \frac{SPS_{antlat} + SPS_{inflat}}{2} + \frac{SRS_{antsept} + SRS_{infsept}}{2}$$

@@ -2,7 +2,7 @@
 title: "Diagnostic performance of left ventricular mechanical dyssynchrony indices using cardiovascular magnetic resonance feature tracking"
 author:
  - "Daniel E Loewenstein MD^1^, Björn Wieslander MD PhD^1^, Einar Heiberg PhD^2^, Jimmy Axelsson MD^1^, Igor Klem MD^3^, Robin Nijveldt MD PhD^4^, Erik B Schelbert MSc MD^5^, Peder Sörensson MD PhD^6^, Andreas Sigfridsson PhD^1^, David G Strauss MD^7^,\nRaymond J Kim MD^8^, Brett D Atwater MD^3,9^, Martin Ugander MD PhD^1,10^"
- - "^1^Department of Clinical Physiology, Karolinska University Hospital, and Karolinska Institutet, Solna, Stockholm, Sweden"
+ - "^1^Department of Clinical Physiology, Karolinska University Hospital, and Karolinska Institutet, Stockholm, Sweden"
  - "^2^Clinical Physiology, Department of Clinical Sciences Lund, Lund University, Skåne University Hospital, Lund, Sweden"
  - "^3^Division of Cardiology, Duke University Medical Center, Durham, NC, USA"
  - "^4^Department of Cardiology, Radboud University Medical Center, Nijmegen, the Netherlands"
@@ -95,39 +95,30 @@ stats$ssi$cispec <- as_percent(stats$ssi$cispec)
 
 # Abstract
 
-*Background:* Cardiac imaging-based indices of left ventricular (LV) mechanical
-dyssynchrony have limited accuracy for predicting the response to cardiac
-resynchronization therapy (CRT). The aim of the study was to evaluate the
-diagnostic performance of mechanical dyssynchrony indices in a study population
-of patients with severely reduced ejection fraction and no LV myocardial scar
-assessed by cardiovascular magnetic resonance (CMR), and either left bundle
-branch block (LBBB) or normal QRS duration.
-*Methods:* We retrospectively identified `r length(unique(dillacs$id))`
-patients from three centers, with LV ejection fraction ${\le}{35}$%, no scar by
-CMR late gadolinium enhancement, and either normal electrocardiographic QRS
-duration (${<}120$ms) and normal frontal plane electrical axis (-30 to
-+90 degrees) (control, `r sprintf("n=%d", nrow(Control))`), or LBBB by Strauss'
-criteria (LBBB, `r sprintf("n=%d", nrow(LBBB))`). The CMR image data from these
-subjects is made publicly available as part of this publication. CMR feature
-tracking was used to derive circumferential strain in a midventricular
-short-axis cine image. Using circumferential strain, mechanical dyssynchrony
-was quantified as the circumferential uniformity ratio estimate (CURE) and the
-systolic stretch index (SSI), respectively.
-*Results:* Both CURE and SSI resulted in measures of mechanical dyssynchrony that were more
-severe (lower CURE, higher SSI) in LBBB compared to controls
-(CURE, median [interquartile range], `r print_m_iqr("cure", LBBB)` vs `r print_m_iqr("cure", Control)`,
-p`r pval_print(cure_wilcox_pval)`; 
-SSI `r print_m_iqr("ssi", LBBB)` vs `r print_m_iqr("ssi", Control)`,
-p`r pval_print(ssi_wilcox_pval)`). 
-SSI outperformed CURE in the ability to discriminate between LBBB and controls
-(area under the receiver operating characteristics curve [95% confidence interval]
+A subgroup of patients with non-specific intraventricular conduction delay
+(IVCD) have a left bundle branch block (LBBB)-like activation pattern that could
+potentially benefit from cardiac resynchronization therapy. However, wihle
+indices of dyssynchrony in LBBB could potentially be applied to other patient
+groups, their relative accuracies in LBBB are not known. Therefore, we evaluated
+the classification accuracy of dyssynchrony indices in a study population of
+patients with severely reduced ejection fraction and no scar by cardiovascular
+magnetic resonance (CMR), and either left bundle branch block (LBBB,
+`r sprintf("n=%d", nrow(LBBB))`) or normal QRS duration (control, `r sprintf("n=%d", nrow(Control))`).
+This CMR image data is made publicly
+available. Using CMR feature tracking circumferential strain, dyssynchrony was
+quantified as the circumferential uniformity ratio estimate (CURE) and the
+systolic stretch index (SSI). Both CURE and SSI quantified more severe
+dyssynchrony in LBBB compared to controls (p${<}0.001$ for booth). SSI
+outperformed CURE for discriminating between LBBB and controls (area under the
+receiver operating characteristics curve [95% confidence interval]
 `r print_auc_ci("ssi")` vs `r print_auc_ci("cure")`, 
-p`r pval_print(stats$compare_auc$p.value)`; 
-sensitivity `r sprintf("%.0f [%.0f-%.0f]", stats$ssi$sens, stats$ssi$cisens["2.5%"], stats$ssi$cisens["97.5%"])` 
-vs `r sprintf("%.0f [%.0f-%.0f] %%", stats$cure$sens, stats$cure$cisens["2.5%"], stats$cure$cisens["97.5%"])`,
-`r sprintf("p%s", pval_print(stats$sens_xmcnemar))`; specificity `r sprintf("%.0f [%.0f-%.0f]", stats$ssi$spec, stats$ssi$cispec["2.5%"], stats$ssi$cispec["97.5%"])`
-vs `r sprintf("%.0f [%.0f-%.0f] %%", stats$cure$spec, stats$cure$cispec["2.5%"], stats$cure$cispec["97.5%"])`,
-`r sprintf("p%s", pval_print(stats$spec_xmcnemar))`).
-*Conclusions:* The ability to discriminate between LBBB and normal QRS duration
-among patients with severely reduced ejection fraction and no scar was fair for
-CURE and excellent for SSI.
+p`r pval_print(stats$compare_auc$p.value)`). The ability to
+discriminate between LBBB and normal QRS duration among patients with severely
+reduced ejection fraction and no scar was fair for CURE and excellent for SSI.
+SSI merits further evaluation for detecting dyssynchrony in IVCD.
+
+# Keywords
+
+Cardiac Magnetic Resonance; Mechanical dyssynchrony; Left Bundle Branch Block;
+Cardiac Resynchronization Therapy; Heart Failure; Circumferential Strain;
+Feature Tracking
