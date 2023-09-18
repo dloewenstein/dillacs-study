@@ -1,68 +1,60 @@
 # Background
 
-No overall benefit of cardiac resynchronization therapy (CRT) has previously
-been shown for patients with heart failure (HF) and non-specific
-intraventricular conduction delay (IVCD)
-[@rickard_predictorsresponsecardiac_2016; @sipahi_effectqrsmorphology_2012]
-. However, this has recently been contested in a large patient-level
-meta-analysis including several pivotal CRT trials
-[@friedman_cardiacresynchronizationtherapy_2023]. The definition of IVCD
-makes for a heterogenous group
-[@eschalier_nonspecificintraventricularconduction_2015], and predicting CRT
-response based on QRS duration and electrocardiogram (ECG) morphology in
-isolation could be too simplistic an approach
-[@peichl_spectruminterintraventricular_2004]. Potential CRT benefit in
-well-selected patients with IVCD is also supported by findings in a subgroup
-that present with a left bundle branch block (LBBB)-like activation pattern that
-could potentially benefit from CRT
-[@ploux_noninvasiveelectrocardiographicmapping_2013; @eschalier_nonspecificintraventricularconduction_2015; @vanstipdonk_identifying_2016].
-Consequently, it may be of importance to better understand and improve the
-potential for response to CRT among patients with IVCD.
+Information about mechanical dyssynchrony characteristics in patients with a
+high likelihood of cardiac resynchronization therapy (CRT) response is of great
+interest in identifying predictors of CRT response. Left ventricular (LV)
+dyssynchrony, the substrate that is corrected by CRT, is a discoordination of
+intraventricular regional mechanical LV activation. However, LV dyssynchrony is
+not a unique feature of a single etiology. Rather, abnormalities of regional
+myocardial mechanics can be caused by conduction abnormalities, especially LBBB,
+or by focal myocardial fibrosis, also referred to as scar
+[@maret_functional_2009].
 
-Cardiovascular magnetic resonance (CMR) feature tracking has been used to
-characterize mechanical contraction features in patients with LBBB compared to
-healthy controls [@revah_cardiovascularmagneticresonance_2016]. The COMPANION,
-REVERSE, and MADIT-CRT trials demonstrated that patients with LBBB derived
-greater benefit from CRT compared to those with other conduction patterns
-[@zareba_effectiveness_2011; @gold_effect_2012;
+Myocardial scarring has been found to be negatively
+associated with CRT response [@delgado_relative_2011;
+@bilchick_impactmechanicalactivation_2014; @taylor_leftventricularlead_2016;
+@atwater_ecg_2015]. Indices of mechanical dyssynchrony are often derived from
+measurements of cardiac deformation such as strain. Strain measurements have
+been found to be greatly affected by the presence of myocardial scar
+[@goto_comparison_2017; @luetkens_feature-tracking_2017; @khan_comparison_2015]
+or myocardial edema [@luetkens_feature-tracking_2017; @khan_comparison_2015].
+Hence, the failure of most indices of mechanical dyssynchrony can be attributed
+to a lack of specificity [@voigt_cardiac_2016]. Consequently, the goal of
+dyssynchrony analysis should be detection of a mechanical dyssynchrony pattern
+amenable to CRT, and not the detection of mechanical dyssynchrony per se
+[@voigt_cardiac_2016].
+
+The COMPANION, REVERSE, and MADIT-CRT trials demonstrated that patients with
+LBBB derived greater benefit from CRT compared to those with other conduction
+patterns [@zareba_effectiveness_2011; @gold_effect_2012;
 @bristow_cardiac-resynchronization_2004]. Furthermore, positive CRT response and
 "super-response" to CRT have to an even greater extent been found to be
 associated with strict LBBB, as defined by Strauss et al.
 [@strauss_definingleftbundle_2011], when compared to LBBB defined by
 conventional criteria [@mascioli_electrocardiographiccriteriatrue_2012;
 @tian_truecompleteleft_2013]. This is likely a result of greater specificity for
-the strict LBBB criteria for identifying clinically significant LV dyssynchrony, the
-substrate that is corrected by CRT. Left ventricular dyssynchrony is a
-discoordination of intraventricular regional mechanical LV activation.
-Mechanical dyssynchrony has been proposed as one of the principal therapeutic
-targets of CRT [@leclercq_retimingfailingheart_2002]. As such, mechanical
-dyssynchrony makes for a potential predictor of CRT response.
+the strict LBBB criteria for identifying clinically significant LV dyssynchrony.
+Non-specific intraventricular conduction delay (IVCD) is the second most
+prevalent conduction abnormality amongst patients receiving CRT
+[@vereckei_roleelectrocardiographyelaboration_2016; @friedman_cardiacresynchronizationtherapy_2023].
+No overall benefit of CRT has previously been shown for patients with heart
+failure (HF) and IVCD [@rickard_predictorsresponsecardiac_2016;
+@sipahi_effectqrsmorphology_2012]. Consequently, this has recently been contested in
+a large patient-level meta-analysis including several pivotal CRT trials
+[@friedman_cardiacresynchronizationtherapy_2023].
 
-Abnormalities of regional myocardial mechanics can be caused by conduction
-abnormalities, especially LBBB, or by focal
-myocardial fibrosis, also referred to as scar [@maret_functional_2009].
-Myocardial scarring has been found to be negatively associated with CRT response
-[@delgado_relative_2011; @bilchick_impactmechanicalactivation_2014;
-@taylor_leftventricularlead_2016; @atwater_ecg_2015]. Indices of mechanical
-dyssynchrony are often derived from measurements of cardiac deformation such as
-strain. Strain measurements have been found to be greatly affected by the
-presence of myocardial scar [@goto_comparison_2017; @luetkens_feature-tracking_2017;
-@khan_comparison_2015] or myocardial edema [@luetkens_feature-tracking_2017;
-@khan_comparison_2015]. Importantly, the failure of most indices of mechanical dyssynchrony
-can be attributed to a lack of specificity [@voigt_cardiac_2016]. Consequently,
-the goal of dyssynchrony analysis should be detection of a mechanical
-dyssynchrony pattern amenable to CRT, and not the detection of mechanical
-dyssynchrony per se [@voigt_cardiac_2016]. Information about mechanical
-dyssynchrony characteristics in patients with a high likelihood of CRT
-response, while at the same time controlling for concomitant pathology, e.g
-myocardial scar, is of great interest in identifying predictors of CRT
-response. In particular, it is of interest to evaluate the classification
-accuracy of an LBBB-like activation pattern in patients with LBBB, which could
-subsequently be applied to identify LBBB-like activation in patients with IVCD.
-However, information about the relative diagnostic performance of dyssynchrony
-indices even in LBBB is scarce.
-
-Therefore, the aim of this study was to investigate the classification accuracy
-of mechanical dyssynchrony indices in patients with either strict LBBB or
-normal QRS duration, a left ventricular ejection fraction ${\le}35\%$, and no LV
-myocardial scar assessed by CMR late gadolinium enhancement (LGE).
+The definition of IVCD makes for a heterogenous group
+[@eschalier_nonspecificintraventricularconduction_2015], and predicting CRT
+response based on QRS duration and electrocardiogram (ECG) morphology in
+isolation could be too simplistic an approach
+[@peichl_spectruminterintraventricular_2004]. Patients with LBBB and IVCD,
+respectively, differ in their electrocardiographic phenotypes. However,
+similarities in regional myocardial mechanics might help identify subgroups of
+IVCD patients with LBBB-like characteristics. An index summarizing the specific
+mechanical characteristics of LBBB would effectively facilitate such a
+comparison. Therefore, the aim of this study was to compare and validate the
+specificity of two previously developed indices of dyssynchrony in their ability
+to identify the mechanical characteristics induced by strict LBBB, compared to
+normal QRS duration, in patients with left ventricular ejection fraction (LVEF)
+${\le}35\%$, and no LV myocardial scar assessed by CMR lage gadolinium
+enhancement (LGE).
