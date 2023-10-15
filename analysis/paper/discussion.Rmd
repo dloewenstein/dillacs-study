@@ -58,7 +58,7 @@ of movement in the septum and lateral wall.
 
 SSI was developed by Lumens et al.
 [@lumens_differentiatingelectromechanicalnon_2015] in an attempt to
-characterize the electromechancial substrate that may respond to CRT. They used a
+characterize the electromechanical substrate that may respond to CRT. They used a
 computational model to simulate electromechanical and non-electrical substrates
 of mechanical dyssynchrony and identified strain characteristics specific for
 the different substrates of mechanical dyssynchrony. In a study of patients
@@ -167,10 +167,10 @@ influence the results.
 SSI was superior to CURE regarding the ability to discriminate between
 strict LBBB and normal QRS duration among patients with severely reduced
 ejection fraction and no scar. SSI merits further evaluation for detecting
-dyssynchrony in IVCD. The amount of dyssynchrony in patients with no
-scar, and severely reduced ejection fraction, needs to be taken into account when
+dyssynchrony in IVCD. The amount of dyssynchrony in patients with no scar, and
+severely reduced ejection fraction, needs to be taken into account when
 developing and evaluating indices aimed at accurately identifying mechanical
-dyssynchrony amenable to CRT. Such en evaluation should preferably include
+dyssynchrony amenable to CRT. Such an evaluation should preferably include
 control subjects with normal QRS duration, severely reduced ejection fraction,
 and the absence of myocardial scar, and imaging data from such patients is
 provided for public use.

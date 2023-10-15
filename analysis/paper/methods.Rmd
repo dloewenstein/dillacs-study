@@ -108,11 +108,11 @@ and $V_2$ (QS or rS configuration), a QRS duration ${\ge}140$ ms for men and
 ${\ge}130$ ms for women, and the presence of mid-QRS notching or slurring in 
 ${\ge}2$ of leads $V_1,~V_2,~V_5,~V_6$, I and aVL [@strauss_definingleftbundle_2011].
 Subjects were excluded if they had a history of congenital heart disease, CMR evidence
-of myocardial storage disease, atrial fibrillation, prior open heart surgery,
+of myocardial storage disease, atrial fibrillation, prior open-heart surgery,
 or LV septal wall flattening indicative of clinically significant pulmonary
 hypertension. The following baseline characteristics were collected: age, sex,
 height, weight, body surface area (BSA), body mass index (BMI), and CMR
-measures of LV volumes, function and mass. Among the patients who met the
+measures of LV volumes, function, and mass. Among the patients who met the
 inclusion criteria (n=87), patients were excluded due to having Takotsubo
 cardiomyopathy (n=1), atrial fibrillation discovered at time of feature
 tracking analysis (n=1), or missing or insufficient number of diagnostic quality

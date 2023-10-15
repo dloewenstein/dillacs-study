@@ -62,10 +62,7 @@ each site, and all subjects either provided written informed consent or were
 included following a retrospective waiver of informed consent provided by the
 local ethics committee.
 
-## Consent for publication
-Not applicable.
-
-## Availability of data and materials
+## Data Availability Statement
 The datasets generated and/or analyzed during the current study, as well as code
 needed to reproduce all aspects of the current study, are available in the
 Figshare repository,
@@ -73,6 +70,12 @@ doi: [10.6084/m9.figshare.15155596](https://doi.org/10.6084/m9.figshare.15155596
 The most recent version of the analysis code is available in the Github
 repository,
 https://github.com/dloewenstein/dillacs-study.
+
+## Consent
+The study was approved by the local human subject research ethics
+committee at each site, and all subjects either provided written informed
+consent or were included following a retrospective waiver of informed
+consent provided by the local ethics committee.
 
 ## Competing interests
 EH is the founder of the company Medviso AB which develops medical image
@@ -107,8 +110,13 @@ of data, drafting the work. All authors read and approved the final manuscript.
 ## Acknowledgments
 Not applicable.
 
-## Authors' information
-Not applicable.
+# References
+
+<div id="refs"></div>
+
+\FloatBarrier
+
+\newpage
 
 (ref:dysboxplot-text) Values for the circumferential uniformity ratio estimate (CURE) and the systolic stretch index (SSI) for left bundle branch block (LBBB) and controls. The box and whisker plots show the median (horizontal line),  interquartile range (box), and data points within $1.5 \times$ interquartiles ranges of the first and third quartile, respectively (whiskers). Note, there is more pronounced mechanical dyssynchrony (lower CURE, higher SSI) in LBBB compared to control. CURE is more homogeneously distributed between groups compared to SSI.
 
