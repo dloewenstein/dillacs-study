@@ -1,5 +1,5 @@
 ---
-title: Diagnostic performance of left ventricular mechanical dyssynchrony indices using CMR feature tracking
+title: Accuracy of left ventricular mechanical dyssynchrony indices for mechanical characteristics of left bundle branch block using cardiovascular magnetic resonance feature tracking
 author: Daniel E Loewenstein MD, Björn Wieslander MD PhD, Einar Heiberg PhD, Jimmy Axelsson MD, Igor Klem MD, Robin Nijveldt MD PhD, Erik B Schelbert MSc MD, Peder Sörensson MD PhD, Andreas Sigfridsson PhD, David G Strauss MD PhD, Raymond J Kim MD, Brett D Atwater MD, Martin Ugander MD PhD
 ---
 
@@ -12,7 +12,11 @@ provided zip file.
 To reproduce the study results and manuscript you will need to install [Docker](https://https://www.docker.com/).
 Further usage instructions can be found [here](https://docs.docker.com/get-started/).
 
-In a new terminal, navigate to the folder containing the contents of the provided zip file.
+Unzip the content of `data.zip` as well as that of `dillacs-study.zip`. Move all
+the image data contained in the `data.zip` unzipped folder into the
+`dillacs-study\analysis\data\raw_data\` folder.
+
+In a new terminal, navigate to the folder containing the unzipped contents of `dillacs-study.zip`.
 
 Start with building the docker image by running the following command in a terminal
 
@@ -32,7 +36,7 @@ docker run --rm -it --name dillacs --mount type=bind,source=$(pwd),target=/proje
 (If you are on a windows machine please change the `source=$(pwd)` to `source=C:\\path_to_the_extracted_zip_file`
 where you provide the full pathway to the extracted archive.)
 
-The resulting manuscript file can then be found in: `./analysis/paper/_book/Loewenstein-et-al.---Diagnostic-performance-of-left-ventricular-mechanical-dyssynchrony-indices-using-CMR-feature-tracking.docx`
+The resulting manuscript file can then be found in the `./analysis/paper/_book/` folder.
 
 CMR files are analyzed in [Segment](https://medviso.com/) (v3.0, Medviso&reg;,
 Lund, Sweden) which is freely available for download to view the CMR images.
