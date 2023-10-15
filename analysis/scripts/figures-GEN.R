@@ -92,6 +92,9 @@ p_dys_distr <-
                 mapping = aes(annotations = annotations, xmin = xmin, xmax = xmax, y_position = y, group = dyssynchrony_index),
                 inherit.aes = FALSE,
                 manual = TRUE) +
+    geom_blank(data = data.frame(dyssynchrony_index = c("CURE", "CURE", "SSI", "SSI"),
+                                 value = c(0, 1.08, 0, 25.5),
+                                 lbbb1_control0 = c("LBBB", "Control", "Control", "LBBB"))) +
     facet_wrap(~dyssynchrony_index, 
                scales = "free",
                strip.position = "left",
@@ -104,7 +107,8 @@ p_dys_distr <-
     scale_fill_manual(values = safe_colors_boxplot) +
     scale_color_manual(values = safe_colors_boxplot) +
     scale_x_discrete(expand = expansion(add = c(0.7, 0))) +
-    scale_y_continuous(name = NULL, expand = expansion(mult = c(0, 0.1))) +
+    scale_y_continuous(name = NULL, expand = c(0,0),
+                       breaks = function(x){ifelse(x[2]<=2, return(seq(0,1,by=0.25)), return(seq(0, 25, by=5)))}) +
     expand_limits(y = 0) +
     guides(fill = FALSE, colour = FALSE) +
     theme_classic() +
@@ -161,7 +165,7 @@ format_thresh <- function(thresh, sens, spec) {
 format_thresh <- Vectorize(format_thresh)
 
 text_height <- 0.25
-text_size   <- 4
+text_size   <- 4.25
 
 p_roc_auc <-
     ggroc( list( SSI = stats$ssi$fit,  CURE = stats$cure$fit ), 
@@ -197,18 +201,18 @@ p_roc_auc <-
         size = text_size,
         fontface = "bold",
         nudge_x = c(.04, .04),
-        nudge_y = c(-.095, -.095),
+        nudge_y = c(-.075, -.075),
         hjust = 0
     ) +
-    geom_text( data = roc_results,  aes( 0.48,  text_height + 0.04, 
+    geom_text( data = roc_results,  aes( 0.40,  text_height + 0.03, 
                                          label = dyssynchrony_index ),
         inherit.aes = FALSE,
         size = text_size,
         fontface = "bold",
-        nudge_y = c(.04, 0),
+        nudge_y = c(.03, 0),
         hjust = 0
     ) +
-    geom_text( data = roc_results,  aes( 0,  text_height + 0.04,  
+    geom_text( data = roc_results,  aes( 0,  text_height + 0.03,  
                                          label = sprintf( "%.2f [%.2f, %.2f]", 
                                                           auc, 
                                                           auc_lower, 
@@ -217,7 +221,7 @@ p_roc_auc <-
         inherit.aes = FALSE,
         size = text_size,
         fontface = "bold",
-        nudge_y = c(.04, 0),
+        nudge_y = c(.03, 0),
         hjust = 1
     ) +
     annotate(
@@ -232,7 +236,7 @@ p_roc_auc <-
     annotate(
         "text", 
         x = 0, 
-        y = text_height + 0.12, 
+        y = text_height + 0.09, 
         label = "AUC [95% CI]", 
         hjust = 1,
         size = text_size,
@@ -242,15 +246,15 @@ p_roc_auc <-
     scale_x_reverse(labels = scales::percent) +
     scale_color_manual(values = safe_colors) +
     scale_fill_manual(values = safe_colors) +
+    labs(x = "Specificity", y = "Sensitivity") +
     guides(color = FALSE, fill = FALSE) +
     theme_classic() +
     theme(
-        legend.position = c(0.92, 0.5),
         axis.text = element_text(face = "bold", size = 12),
         axis.title = element_text(face = "bold", size = 12)
     )
 
-ggsave("roc_by_dyssynchrony_index.png", path = FIG_DIR, dpi = 600, width = 5, height = 5)
+ggsave("roc_by_dyssynchrony_index.png", path = FIG_DIR, dpi = 600, width = 7, height = 7)
 
 
 capitalize <- function(text) {
@@ -347,6 +351,7 @@ p_perf_measure_cutoff <-
     )
 
 ggsave("performance_measure_cutoff.png", path = FIG_DIR, dpi = 600)
+
 corr_plots <- 
     ggplot(
         dillacs %>%

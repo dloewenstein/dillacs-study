@@ -58,7 +58,7 @@ of movement in the septum and lateral wall.
 
 SSI was developed by Lumens et al.
 [@lumens_differentiatingelectromechanicalnon_2015] in an attempt to
-characterize the electromechancial substrate that may respond to CRT. They used a
+characterize the electromechanical substrate that may respond to CRT. They used a
 computational model to simulate electromechanical and non-electrical substrates
 of mechanical dyssynchrony and identified strain characteristics specific for
 the different substrates of mechanical dyssynchrony. In a study of patients
@@ -66,7 +66,7 @@ enrolled in the Adaptive CRT trial, it was found that SSI by echocardiography
 was independently associated with CRT outcome, adjusting for QRS morphology,
 QRS duration, sex, heart failure etiology, and treatment with angiotensin-converting enzyme
 inhibitors/angiotensin II receptor blockers
-[@gorcsan_systolicstretchcharacterizes_2018]. However, whether SSI has added
+[@gorcsan_systolicstretchcharacterizes_2019]. However, whether SSI has added
 prognostic value over strict LBBB morphology is still unknown. It remains to be
 explored whether SSI can be used to identify non-LBBB patients that may be suitable for CRT,
 and such studies are justified.
@@ -166,10 +166,11 @@ influence the results.
 
 SSI was superior to CURE regarding the ability to discriminate between
 strict LBBB and normal QRS duration among patients with severely reduced
-ejection fraction and no scar. The amount of dyssynchrony in patients with no
-scar, and severely reduced ejection fraction, needs to be taken into account when
+ejection fraction and no scar. SSI merits further evaluation for detecting
+dyssynchrony in IVCD. The amount of dyssynchrony in patients with no scar, and
+severely reduced ejection fraction, needs to be taken into account when
 developing and evaluating indices aimed at accurately identifying mechanical
-dyssynchrony amenable to CRT. We suggest that control subjects with normal QRS
-duration, severely reduced ejection fraction, and the absence of myocardial
-scar, be included when developing and evaluating mechanical dyssynchrony
-indices aimed at predicting CRT response.
+dyssynchrony amenable to CRT. Such an evaluation should preferably include
+control subjects with normal QRS duration, severely reduced ejection fraction,
+and the absence of myocardial scar, and imaging data from such patients is
+provided for public use.

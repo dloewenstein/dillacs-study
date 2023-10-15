@@ -30,42 +30,10 @@ source(file.path(PROJECT_DIR, "R", "formatCons.R"))
 assignInNamespace("formatCons", formatCons, ns = "Hmisc")
 ```
 
-# Abbreviations
-**AUC:** Area under the curve\
-**BMI:** Body Mass Index\
-**BSA:** Body Surface Area\
-**CI:** Confidence Interval\
-**CMR:** Cardiovascular Magnetic Resonance\
-**CRT:** Cardiac Resynchronization Therapy\
-**CURE:** Circumferential Uniformity Ratio Estimate\
-**ECG:** Electrocardiography\
-**HF:** Heart Failure\
-**LBBB:** Left Bundle Branch Block\
-**LGE:** Late Gadolinium Enhancement\
-**LV:** Left ventricular\
-**LVEDV:** Left Ventricular End-Diastolic Volume\
-**LVEDVI:** Left Ventricular End-Diastolic Volume Index\
-**LVEF:** Left Ventricular Ejection Fraction\
-**LVM:** Left Ventricular Mass\
-**LVMI:** Left Ventricular Mass Index\
-**OR:** Odds Ratio\
-**ROC:** Receiver Operating Characteristics\
-**SPS:** Systolic Pre-Stretch\
-**SRS:** Septal Rebound Stretch\
-**SSI:** Systolic Stretch Index\
-
-# Declarations
-
-## Ethics approval and consent to participate
-The study was approved by the local human subject research ethics committee at
-each site, and all subjects either provided written informed consent or were
-included following a retrospective waiver of informed consent provided by the
-local ethics committee.
-
-## Consent for publication
+# Acknowledgments
 Not applicable.
 
-## Availability of data and materials
+# Data Availability Statement
 The datasets generated and/or analyzed during the current study, as well as code
 needed to reproduce all aspects of the current study, are available in the
 Figshare repository,
@@ -74,7 +42,13 @@ The most recent version of the analysis code is available in the Github
 repository,
 https://github.com/dloewenstein/dillacs-study.
 
-## Competing interests
+# Consent
+The study was approved by the local human subject research ethics
+committee at each site, and all subjects either provided written informed
+consent or were included following a retrospective waiver of informed
+consent provided by the local ethics committee.
+
+# Competing interests
 EH is the founder of the company Medviso AB which develops medical image
 analysis software. RN has received research grants from Philips Volcano and
 Biotronik. RJK is a consultant for Abiomed. BDA has received research grants
@@ -84,54 +58,18 @@ development agreement regarding cardiovascular magnetic resonance between
 Siemens and Karolinska University Hospital. The remaining authors have nothing
 to disclose that is relevant to the contents of this paper.
 
-## Funding
+# Funding
 This work was funded in part by grants to MU from New South Wales Health, Heart
 Research Australia, University of Sydney, Swedish Research Council, Swedish
 Heart and Lung Foundation, Stockholm County Council, and Karolinska Institutet.
 
-## Authors' contributions
-DEL: conception and design of the work, data acquisition and analysis,
-interpretation of data, drafting the work. BW: data acquisition and analysis,
-interpretation of data, substantively revised the work. EH: data analysis,
-interpretation of data, substantively revised the work. JA: data acquisition,
-substantively revised the work. IK: design of the work, data acquisition,
-interpretation of data, substantively revised the work. RN: data acquisition,
-interpretation of data, substantively revised the work. EBS: data acquisition,
-substantively revised the work. PS: data acquisition, substantively revised the
-work. AS: data acquisition, substantively revised the work. DGS: design of the
-work, substantively revised the work. RJK: data acquisition, substantively
-revised the work. BDA: conception and design of the work, interpretation of
-data, drafting the work. MU: conception and design of the work, interpretation
-of data, drafting the work. All authors read and approved the final manuscript.
+# References
 
-## Acknowledgments
-Not applicable.
-
-## Authors' information
-Not applicable.
-
-(ref:dysboxplot-text) Values for the circumferential uniformity ratio estimate (CURE) and the systolic stretch index (SSI) for left bundle branch block (LBBB) and controls. The box and whisker plots show the median (horizontal line),  interquartile range (box), and data points within $1.5 \times$ interquartiles ranges of the first and third quartile, respectively (whiskers). Note, there is more pronounced mechanical dyssynchrony (lower CURE, higher SSI) in LBBB compared to control. CURE is more homogenously distributed between groups compared to SSI.
-
-
-```{r dysboxplot, fig.cap = '(ref:dysboxplot-text)', include = TRUE, fig.height=5, fig.width=5}
-knitr::include_graphics(file.path(FIG_DIR, "dyssynchrony_distribution.png"))
-```
-
-(ref:dysrocplot-text) Receiver operating characteristics (ROC) for univariable logistic regression models to differentiate between left bundle branch block (LBBB) and controls using the circumferential uniformity ratio estimate (CURE) and the systolic stretch index (SSI), respectively. Better discriminatory ability for LBBB is seen for SSI compared to CURE. AUC = area under the ROC curve, CI = confidence interval.
-
-```{r dysrocplot, fig.cap = '(ref:dysrocplot-text)', include = TRUE, fig.height=5, fig.width=5}
-knitr::include_graphics(file.path(FIG_DIR, "roc_by_dyssynchrony_index.png"))
-```
-
-
-(ref:performanceplot-text) Bar plot showing sensitivity and specificity for detecting left bundle branch block using the systolic stretch index (SSI) and the circumferential uniformity ratio estimate (CURE), respectively. Error bars denote 95% confidence intervals.
-
-
-```{r performanceplot, fig.cap = '(ref:performanceplot-text)', include = TRUE, fig.height=4, fig.width=6}
-knitr::include_graphics(file.path(FIG_DIR, "performance_measure_cutoff.png"))
-```
+<div id="refs"></div>
 
 \newpage
+
+\FloatBarrier
 
 ```{r tableone, include = TRUE}
 dillacs$Gender <- factor(dillacs$Gender, levels = c("F", "M"), labels = c("Female", "Male"))
@@ -189,6 +127,25 @@ class(tableone) <- c("html", "character")
 tableone
 ```
 
-# References
+\newpage
 
-\FloatBarrier
+(ref:dysboxplot-text) Values for the circumferential uniformity ratio estimate (CURE) and the systolic stretch index (SSI) for left bundle branch block (LBBB) and controls. The box and whisker plots show the median (horizontal line),  interquartile range (box), and data points within $1.5 \times$ interquartiles ranges of the first and third quartile, respectively (whiskers). Note, there is more pronounced mechanical dyssynchrony (lower CURE, higher SSI) in LBBB compared to control. CURE is more homogenously distributed between groups compared to SSI.
+
+
+```{r dysboxplot, fig.cap = '(ref:dysboxplot-text)', include = TRUE, fig.height=5, fig.width=5}
+knitr::include_graphics(file.path(FIG_DIR, "dyssynchrony_distribution.png"))
+```
+
+(ref:dysrocplot-text) Receiver operating characteristics (ROC) for univariable logistic regression models to differentiate between left bundle branch block (LBBB) and controls using the circumferential uniformity ratio estimate (CURE) and the systolic stretch index (SSI), respectively. Better discriminatory ability for LBBB is seen for SSI compared to CURE. AUC = area under the ROC curve, CI = confidence interval.
+
+```{r dysrocplot, fig.cap = '(ref:dysrocplot-text)', include = TRUE, fig.height=5, fig.width=5}
+knitr::include_graphics(file.path(FIG_DIR, "roc_by_dyssynchrony_index.png"))
+```
+
+
+(ref:performanceplot-text) Bar plot showing sensitivity and specificity for detecting left bundle branch block using the systolic stretch index (SSI) and the circumferential uniformity ratio estimate (CURE), respectively. Error bars denote 95% confidence intervals.
+
+
+```{r performanceplot, fig.cap = '(ref:performanceplot-text)', include = TRUE, fig.height=4, fig.width=6}
+knitr::include_graphics(file.path(FIG_DIR, "performance_measure_cutoff.png"))
+```

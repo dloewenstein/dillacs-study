@@ -213,7 +213,7 @@ curve is presented.
 
 ## CMR image availability
 
-All CMR images analyzed as part of the current study are made available online
+All CMR images analyzed as part of the current study are made available online\
 (doi: [10.6084/m9.figshare.15155596](https://doi.org/10.6084/m9.figshare.15155596)).
 Among the individual CMR exams (n=80) the majority were performed on a Siemens
 scanner (n=75) and only a few on a Philips scanner (n=5), all contain a cine

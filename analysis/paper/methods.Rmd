@@ -108,11 +108,11 @@ and $V_2$ (QS or rS configuration), a QRS duration ${\ge}140$ ms for men and
 ${\ge}130$ ms for women, and the presence of mid-QRS notching or slurring in 
 ${\ge}2$ of leads $V_1,~V_2,~V_5,~V_6$, I and aVL [@strauss_definingleftbundle_2011].
 Subjects were excluded if they had a history of congenital heart disease, CMR evidence
-of myocardial storage disease, atrial fibrillation, prior open heart surgery,
+of myocardial storage disease, atrial fibrillation, prior open-heart surgery,
 or LV septal wall flattening indicative of clinically significant pulmonary
 hypertension. The following baseline characteristics were collected: age, sex,
 height, weight, body surface area (BSA), body mass index (BMI), and CMR
-measures of LV volumes, function and mass. Among the patients who met the
+measures of LV volumes, function, and mass. Among the patients who met the
 inclusion criteria (n=87), patients were excluded due to having Takotsubo
 cardiomyopathy (n=1), atrial fibrillation discovered at time of feature
 tracking analysis (n=1), or missing or insufficient number of diagnostic quality
@@ -158,7 +158,7 @@ dyssynchrony was quantified using the circumferential uniformity ratio estimate
 (CURE) [@helm_cardiac_2005; @leclercq_systolicimprovementmechanical_2002;
 @bilchick_cardiac_2008]
 and the systolic stretch index (SSI)
-[@gorcsan_systolicstretchcharacterizes_2018; @lumens_differentiatingelectromechanicalnon_2015].
+[@gorcsan_systolicstretchcharacterizes_2019; @lumens_differentiatingelectromechanicalnon_2015].
 In short, CURE is derived
 from Fourier transformation of the spatial distribution of strain from
 myocardial segments averaged over the number of short axis slices. CURE is then
@@ -169,7 +169,7 @@ transformation, and $n$ is the number of timeframes covering the cardiac cycle.
 CURE ranges between 0 (perfect dyssynchrony) and 1 (perfect synchrony).
 SSI was originally developed through computer simulations
 [@lumens_differentiatingelectromechanicalnon_2015], and later presented in a
-slightly simplified version for use in echocardiography [@gorcsan_systolicstretchcharacterizes_2018] and is 
+slightly simplified version for use in echocardiography [@gorcsan_systolicstretchcharacterizes_2019] and is 
 calculated as the sum of LV lateral wall systolic pre-stretch
 (SPS) and septal rebound stretch (SRS).
 $$SSI = \frac{SPS_{antlat} + SPS_{inflat}}{2} + \frac{SRS_{antsept} + SRS_{infsept}}{2}$$
